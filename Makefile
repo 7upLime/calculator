@@ -6,7 +6,7 @@ test.o: test.cxx test.h tree.h operations.h scanner.h
 	g++ -c -g test.cxx
 scanner.o: scanner.cxx scanner.h
 	g++ -c -g scanner.cxx
-identifiers.o: identifiers.cxx scanner.h
+identifiers.o: identifiers.cxx scanner.h operations.h
 	g++ -c -g identifiers.cxx
 operations.o: operations.cxx operations.h
 	g++ -c -g operations.cxx

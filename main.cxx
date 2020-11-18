@@ -5,9 +5,9 @@
 
 int main(){
 
-  Test_Scanner();
-
-
-  return 0;
-
+  if(Test_Scanner())
+    return 0;
+  else
+    return -1;
+  
 }

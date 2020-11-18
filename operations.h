@@ -2,6 +2,9 @@
 
 #include <cmath>
 #include <cassert>
+/* #include <map> */
+#include <vector>
+#include <string>
 
 /*   ok... now I know that all of this was pretty useless....
      This project was meant also to help me learn c++,
@@ -51,7 +54,7 @@ enum OPERATION{
 };
 
 
-constexpr double (*OPERATIONS[NUM_OF_OPERATIONS])(double, double) = {
+static double (*OPERATIONS[NUM_OF_OPERATIONS])(double, double) = {
 
 							   addition,
 							   subtraction,
@@ -64,3 +67,33 @@ constexpr double (*OPERATIONS[NUM_OF_OPERATIONS])(double, double) = {
 							   tan,
 							   
 };
+
+/* 
+   Some poor solution.. 
+   I make use of those in identifiers.cxx
+   The main issue was to verify if a token is a function
+   and if a partial token is a function...
+   with the same function...
+*/
+static std::vector<std::string> SYMBOLS{"+","-","*","/","^"};
+static std::vector<std::string> FUNCTIONS{"sin","cos","tan","sqrt"};
+
+
+/* 
+   Operations and functions have constant names...
+   I can't make any use of this right now...
+*/
+
+/* static std::map<int, const std::string> regexes = { */
+
+/* 	{OPERATION{ADDITION},""}, */
+/* 	{OPERATION{SUBTRACTION}""}, */
+/* 	{OPERATION{MULTIPLICATION},""}, */
+/* 	{OPERATION{DIVISION},""}, */
+/* 	{OPERATION{POW},""}, */
+/* 	{OPERATION{SQRT},""}, */
+/* 	{OPERATION{SIN},""}, */
+/* 	{OPERATION{COS},""}, */
+/*      {OPERATION{TAN},""}, */
+
+/* }; */

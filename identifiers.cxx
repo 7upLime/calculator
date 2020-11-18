@@ -1,16 +1,18 @@
 #include "scanner.h"
+#include "operations.h"
 
 
 bool Scanner::is_digit(const std::string& tok){
 
-  bool static already_decimal;
-
+  int dots{0};			// its initialized with 0 at 
+                                // each function call
   for(const auto t : tok){
     if(!(std::isdigit(t))){
-      if(t == '.' && !already_decimal){
-	already_decimal = true;
+      if(t == '.' && dots < 2){	// zero, one, or more dots
+        dots++;
 	continue;
-      }else
+      }else			// more than one dot
+	dots = 0;
 	return false;
     }
   }
@@ -20,26 +22,19 @@ bool Scanner::is_digit(const std::string& tok){
 
 
 bool Scanner::is_function(const std::string& token){
-
-  const static std::vector<std::string> functions{"sin", "cos", "tan",
-						  "sqrt"};
-
-  for(const auto& function : functions)
-    if(token == function)
+  
+  for(const auto& function : FUNCTIONS) // defined in operations.h
+    if(function.find(token) != std::string::npos)
       return true;
-
   //else
   return false;
   
 }
 
 
-
 bool Scanner::is_operator(const std::string& tok){
 
-  const static std::vector<std::string> operators{"+", "-", "*", "/", "^"};
-
-  for(const auto& op : operators)
+  for(const auto& op : SYMBOLS) // defined in operations.h
     if(tok == op)
       return true;
   // else

@@ -35,8 +35,10 @@ bool Test_Scanner(void){
   std::string filename{"abbecedario.txt"};
   Scanner SCANNER{filename};
 
-  SCANNER.pre_check();
+  SCANNER.input_check();
   SCANNER.print_checked_input();
+  SCANNER.find_tokens();
+  SCANNER.print_found_tokens();
 
   return true;
 
