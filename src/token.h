@@ -7,7 +7,9 @@ enum TYPES{
 	   NUM,
 	   UNARY_OPERATOR,
 	   BINARY_OPERATOR,
-	   BRACKET,
+	   OPEN_BRACKET,
+	   CLOSED_BRACKET,
+	   END_TOK
 };
 
 

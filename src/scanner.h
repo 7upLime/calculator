@@ -8,7 +8,6 @@
 
 #include "parser.h"
 
-#define DEBUG
 
 
 /*
@@ -30,6 +29,8 @@ class Scanner{
   static bool is_digit(const std::string&);
   static bool is_operator(const std::string&);
   static bool is_bracket(const std::string&);
+  static bool is_open_bracket(const std::string&);
+  static bool is_close_bracket(const std::string&);
 
   // Single char check
   bool is_relevant(const char);

@@ -10,3 +10,5 @@
 
 
 bool Test_Scanner(void);
+void print_binary_operators(void);
+void print_unary_operators(void);

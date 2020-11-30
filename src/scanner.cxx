@@ -48,8 +48,10 @@ TOKEN Scanner::categorize_token(std::string &token){
     return TOKEN{token,UNARY_OPERATOR};
   else if(is_operator(token))
     return TOKEN{token,BINARY_OPERATOR};
-  else if(is_bracket(token))
-    return TOKEN{token, BRACKET};
+  else if(is_open_bracket(token))
+    return TOKEN{token, OPEN_BRACKET};
+  else if(is_close_bracket(token))
+    return TOKEN{token, CLOSED_BRACKET};
   else
     return TOKEN{token,NUM};
 
@@ -83,9 +85,12 @@ void Scanner::find_tokens(void){
     buffer = "";		// otherwise will always miss a char
   }
 
-  #ifdef DEBUG
+  token = {"end", END_TOK};	// packs an END_TOKEN
+  TOKENS.push_back(token);     // ends the TOKENS vector
+
+#ifdef DEBUG
   std::cout << "[*] find_tokens() returned normally\n";
-  #endif
+#endif
 }
 
 
@@ -93,7 +98,9 @@ void Scanner::find_tokens(void){
 // functions here come from identifiers.cxx
 bool Scanner::check_token(const std::string& buffer){
 
-  if(is_bracket(buffer) || is_operator(buffer))
+  if(is_open_bracket(buffer) || is_close_bracket(buffer))
+    return true;
+  else if(is_operator(buffer))
     return true;
   else if(is_function(buffer) || is_digit(buffer))
     return true;
@@ -128,7 +135,7 @@ void Scanner::print_token_role(const std::string& token){
     std::cout << "  - Operator, " << token << std::endl;
   else if(is_digit(token))
     std::cout << "  - Digit, " << token << std::endl;
-  else if(is_bracket(token))
+  else if(is_open_bracket(token))
     std::cout << "  - Bracket,  " << token << std::endl;
   else{
     std::cout << "  [!!] Error while identifying token: ` "

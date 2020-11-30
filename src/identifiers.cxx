@@ -20,11 +20,22 @@ bool Scanner::is_digit(const std::string& tok){
   return true;
 }
 
+/*
+  OPERATION::FUNCTIONS is not very clear..
+  that separates the names of the unary_operator from those of 
+  the binary_operators in OPERATION_NAMES array inside "operations.h"
+*/
 
 bool Scanner::is_function(const std::string& token){
+
+  // these are defined in operations.h
+  auto begin{OPERATIONS.upper_bound("aa")};
+  // this because every UNARY_OPERATOR is a string with more than two chars
+  // and every BINARY_OP is a one char string
+  auto end{OPERATIONS.end()};
   
-  for(const auto& function : FUNCTIONS) // defined in operations.h
-    if(function.find(token) != std::string::npos)
+  for(auto ptr{begin}; ptr != end; ptr++)
+    if(ptr->first.find(token) != std::string::npos)
       return true;
   //else
   return false;
@@ -34,8 +45,14 @@ bool Scanner::is_function(const std::string& token){
 
 bool Scanner::is_operator(const std::string& tok){
 
-  for(const auto& op : SYMBOLS) // defined in operations.h
-    if(tok == op)
+  // defined in operations.h
+  auto begin{OPERATIONS.begin()};
+  auto end{OPERATIONS.lower_bound("aa")};
+  // this because every UNARY_OPERATOR is a string with more than two chars
+  // and every BINARY_OP is a one char string
+
+  for(auto ptr{begin}; ptr != end; ptr++)
+    if(tok == ptr->first)
       return true;
   // else
   return false;
@@ -43,11 +60,14 @@ bool Scanner::is_operator(const std::string& tok){
 }
 
 
-
 bool Scanner::is_bracket(const std::string& tok){
+  return is_open_bracket(tok) || is_close_bracket(tok);
+}
 
-  const static std::vector<std::string> bracks{"(", "[",
-					       "{", "}", "]", ")"};
+
+bool Scanner::is_open_bracket(const std::string& tok){
+
+  const static std::vector<std::string> bracks{"(", "[", "{"};
 
   for(const auto& b : bracks)
     if(tok == b)
@@ -57,6 +77,21 @@ bool Scanner::is_bracket(const std::string& tok){
   return false;
 
 }
+
+
+bool Scanner::is_close_bracket(const std::string& tok){
+
+  const static std::vector<std::string> bracks{")", "]", "}"};
+
+  for(const auto& b : bracks)
+    if(tok == b)
+      return true;
+
+  // else
+  return false;
+
+}
+
 
 
 bool Scanner::is_alnum(const char ch){

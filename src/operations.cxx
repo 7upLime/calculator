@@ -21,10 +21,6 @@ double pow(double val1, double val2){
   return std::pow(val1, val2);
 }
 
-double sqrt(double val1, double val2){
-  return std::sqrt(val1);
-}
-
 double sin(double val1, double val2){
   return std::sin(val1);
 }

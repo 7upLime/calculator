@@ -9,7 +9,7 @@ struct Tree_node{
   Tree_node* left;
 
   int key;
-  std::string token;
-  TYPES type;
+  TOKEN token;
+  double (*operation)(double, double);
 
 };
